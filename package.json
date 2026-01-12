@@ -1,0 +1,14 @@
+{
+  "name": "shield-demo-utils",
+  "version": "1.0.0",
+  "description": "Tiny utility library used as a test target for Diff Shield.",
+  "main": "src/index.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

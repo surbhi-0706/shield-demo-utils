@@ -22,3 +22,21 @@ test('returns the same target object', () => {
   const target = {};
   assert.equal(deepMerge(target, { a: 1 }), target);
 });
+
+test('DS-2026-001: __proto__ payload does not pollute Object.prototype', () => {
+  try {
+    deepMerge({}, JSON.parse('{"__proto__": {"polluted": true}}'));
+    assert.equal({}.polluted, undefined);
+  } finally {
+    delete Object.prototype.polluted;
+  }
+});
+
+test('DS-2026-001: constructor.prototype payload does not pollute', () => {
+  try {
+    deepMerge({}, JSON.parse('{"constructor": {"prototype": {"polluted2": true}}}'));
+    assert.equal({}.polluted2, undefined);
+  } finally {
+    delete Object.prototype.polluted2;
+  }
+});

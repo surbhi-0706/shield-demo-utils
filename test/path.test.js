@@ -16,3 +16,16 @@ test('getPath returns fallback when missing', () => {
 test('setPath creates intermediate objects', () => {
   assert.deepEqual(setPath({}, 'a.b.c', 1), { a: { b: { c: 1 } } });
 });
+
+test('DS-2026-002: setPath refuses __proto__ segments', () => {
+  try {
+    assert.throws(() => setPath({}, '__proto__.polluted3', true));
+    assert.equal({}.polluted3, undefined);
+  } finally {
+    delete Object.prototype.polluted3;
+  }
+});
+
+test('DS-2026-002: setPath refuses constructor.prototype segments', () => {
+  assert.throws(() => setPath({}, 'constructor.prototype.polluted4', true));
+});

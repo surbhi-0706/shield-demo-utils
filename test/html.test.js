@@ -12,3 +12,9 @@ test('escapes angle brackets and ampersands', () => {
 test('stripTags removes tags', () => {
   assert.equal(stripTags('<p>Hello <b>you</b></p>'), 'Hello you');
 });
+
+test('DS-2026-003: quotes are escaped so attributes cannot be broken out of', () => {
+  const out = escapeHtml('" onmouseover="alert(1)');
+  assert.equal(out.includes('"'), false);
+  assert.equal(escapeHtml("it's"), 'it&#39;s');
+});

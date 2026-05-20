@@ -13,3 +13,15 @@ test('joins a normal relative path', () => {
 test('fileExtension returns a lowercase extension', () => {
   assert.equal(fileExtension('Report.PDF'), 'pdf');
 });
+
+test('DS-2026-004: ../ traversal is rejected', () => {
+  assert.throws(() => safeJoin('/srv/files', '../../etc/passwd'));
+});
+
+test('DS-2026-004: absolute paths outside the base are rejected', () => {
+  assert.throws(() => safeJoin('/srv/files', '/etc/passwd'));
+});
+
+test('DS-2026-004: null bytes are rejected', () => {
+  assert.throws(() => safeJoin('/srv/files', 'a\0b'));
+});

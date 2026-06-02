@@ -1,0 +1,51 @@
+[
+  {
+    "id": "DS-2026-001",
+    "summary": "Prototype pollution in deepMerge",
+    "cwe": "CWE-1321",
+    "severity": "high",
+    "file": "src/merge.js",
+    "fix_commit": "1018c1c41778d4975542cda0dd3d3cfe5a2c9a7d",
+    "protection": [
+      "UNSAFE_KEYS guard for __proto__, constructor, prototype"
+    ],
+    "real_world_analog": "CVE-2019-10744 (lodash)"
+  },
+  {
+    "id": "DS-2026-002",
+    "summary": "Prototype pollution in setPath",
+    "cwe": "CWE-1321",
+    "severity": "high",
+    "file": "src/path.js",
+    "fix_commit": "6d1188bb2875822f1db1568800c54e7444c9caaa",
+    "protection": [
+      "Throws on __proto__, constructor, prototype segments"
+    ],
+    "real_world_analog": "CVE-2020-7598 (minimist)"
+  },
+  {
+    "id": "DS-2026-003",
+    "summary": "XSS: escapeHtml did not escape quotes",
+    "cwe": "CWE-79",
+    "severity": "medium",
+    "file": "src/html.js",
+    "fix_commit": "4a8c7be10a7eb69d19d5e51e7d3d746d615c7a36",
+    "protection": [
+      "Escapes double and single quotes"
+    ],
+    "real_world_analog": null
+  },
+  {
+    "id": "DS-2026-004",
+    "summary": "Path traversal in safeJoin",
+    "cwe": "CWE-22",
+    "severity": "high",
+    "file": "src/files.js",
+    "fix_commit": "d52f7005e5b5c8063cb966a8b0b9795aac2e8a78",
+    "protection": [
+      "Resolved path must stay inside base directory",
+      "Rejects null bytes"
+    ],
+    "real_world_analog": null
+  }
+]

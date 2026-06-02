@@ -33,3 +33,9 @@ slugify('Hello, World!');                        // 'hello-world'
 `deepMerge` returns the same object you pass as the first argument, so you
 recieve a reference and not a seperate copy. If an error occured while merging,
 the target may be partly updated.
+
+## Security
+
+Security fixes are tracked in [`docs/SECURITY.md`](docs/SECURITY.md) and in
+[`advisories.json`](advisories.json). Please report vulnerabilities privately
+to the maintainers instead of opening a public issue.

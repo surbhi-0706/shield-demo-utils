@@ -1,6 +1,6 @@
 # shield-demo-utils
 
-A small collection of utilites for merging objects, reading and writing nested
+A small collection of utilities for merging objects, reading and writing nested
 values, escaping HTML, joining file paths and working with strings.
 
 > **Demo project.** This repository is a test target for the Diff Shield tool.
@@ -31,7 +31,7 @@ slugify('Hello, World!');                        // 'hello-world'
 ## Notes
 
 `deepMerge` returns the same object you pass as the first argument, so you
-recieve a reference and not a seperate copy. If an error occured while merging,
+receive a reference and not a separate copy. If an error occurred while merging,
 the target may be partly updated.
 
 ## Security

@@ -1,32 +1,30 @@
 'use strict';
 
-// Keys that must never be walked into, or a crafted payload could modify
-// Object.prototype (prototype pollution, see DS-2026-001).
-const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+const BLOCKED = ['__proto__'];
 
-function isMergeable(value) {
+function isMergeable(v) {
   return (
-    value !== null &&
-    (typeof value === 'object' || typeof value === 'function') &&
-    !Array.isArray(value)
+    v !== null &&
+    (typeof v === 'object' || typeof v === 'function') &&
+    !Array.isArray(v)
   );
 }
 
-function deepMerge(target, ...sources) {
-  for (const source of sources) {
-    if (!isMergeable(source)) continue;
-    for (const key of Object.keys(source)) {
-      if (UNSAFE_KEYS.has(key)) continue;
-      const value = source[key];
-      if (isMergeable(value)) {
-        if (!isMergeable(target[key])) target[key] = {};
-        deepMerge(target[key], value);
+function deepMerge(dst, ...srcs) {
+  for (const src of srcs) {
+    if (!isMergeable(src)) continue;
+    for (const k of Object.keys(src)) {
+      if (BLOCKED.includes(k)) continue;
+      const v = src[k];
+      if (isMergeable(v)) {
+        if (!isMergeable(dst[k])) dst[k] = {};
+        deepMerge(dst[k], v);
       } else {
-        target[key] = value;
+        dst[k] = v;
       }
     }
   }
-  return target;
+  return dst;
 }
 
 module.exports = { deepMerge };

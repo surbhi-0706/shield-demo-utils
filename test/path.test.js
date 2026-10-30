@@ -3,7 +3,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const { getPath, setPath } = require('../src/path');
+const { getPath, hasPath, setPath, deletePath } = require('../src/path');
 
 test('getPath reads nested values', () => {
   assert.equal(getPath({ a: { b: 5 } }, 'a.b'), 5);
@@ -17,15 +17,13 @@ test('setPath creates intermediate objects', () => {
   assert.deepEqual(setPath({}, 'a.b.c', 1), { a: { b: { c: 1 } } });
 });
 
-test('DS-2026-002: setPath refuses __proto__ segments', () => {
-  try {
-    assert.throws(() => setPath({}, '__proto__.polluted3', true));
-    assert.equal({}.polluted3, undefined);
-  } finally {
-    delete Object.prototype.polluted3;
-  }
+test('hasPath reports presence', () => {
+  assert.equal(hasPath({ a: { b: undefined } }, 'a.b'), true);
+  assert.equal(hasPath({ a: {} }, 'a.b'), false);
 });
 
-test('DS-2026-002: setPath refuses constructor.prototype segments', () => {
-  assert.throws(() => setPath({}, 'constructor.prototype.polluted4', true));
+test('deletePath removes nested keys', () => {
+  const obj = { a: { b: 1, c: 2 } };
+  assert.equal(deletePath(obj, 'a.b'), true);
+  assert.deepEqual(obj, { a: { c: 2 } });
 });

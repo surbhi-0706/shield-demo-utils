@@ -5,7 +5,7 @@
     "cwe": "CWE-1321",
     "severity": "high",
     "file": "src/merge.js",
-    "fix_commit": "1018c1c41778d4975542cda0dd3d3cfe5a2c9a7d",;
+    "fix_commit": "1018c1c41778d4975542cda0dd3d3cfe5a2c9a7d",
     "protection": [
       "UNSAFE_KEYS guard for __proto__, constructor, prototype"
     ],

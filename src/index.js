@@ -6,4 +6,6 @@ module.exports = {
   ...require('./html'),
   ...require('./files'),
   ...require('./strings'),
+  ...require('./numbers'),
+  ...require('./arrays'),
 };

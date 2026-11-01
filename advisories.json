@@ -22,7 +22,8 @@
       "Throws on __proto__, constructor, prototype segments"
     ],
     "real_world_analog": "CVE-2020-7598 (minimist)"
-  },
+  
+  
   {
     "id": "DS-2026-003",
     "summary": "XSS: escapeHtml did not escape quotes",
